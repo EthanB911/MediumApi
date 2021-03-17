@@ -7,12 +7,13 @@ from bs4 import BeautifulSoup
 print("Medium Coinbase post tracker")
 
 def get_posts():
-    headers = {
-        'Content-Type': "application/x-www-form-urlencoded",
-        'cache-control': "no-cache",
-        "Pragma": "no-cache"
-    }
-    request = requests.get("https://medium.com/@coinbaseblog", headers=headers)
+    # headers = {
+    #     'Content-Type': "application/x-www-form-urlencoded",
+    #     'cache-control': "no-cache",
+    #     "Pragma": "no-cache"
+    # }
+    headers={'User-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36'}
+    request = requests.get("https://medium.com/@coinbaseblog", headers = headers)
     # markup = requests.get("https://ethanbriffa.medium.com/", headers=headers)
     soup = BeautifulSoup(request.content, 'html.parser')
     imgs = soup.find_all("figure", {"class": "paragraph-image"})
@@ -32,9 +33,9 @@ def get_last_url(images, request):
         return False
 
 last_url = 'https://ethanbriffa.medium.com/second-story-957015a76976'
-
+start = time.time()
 count = 1
-while count < 53:
+while count < 60:
     count += 1
     img, req = get_posts()
     last_image = get_last_url(img, req)
@@ -42,7 +43,9 @@ while count < 53:
         if last_image != last_url:
             print("New Post !! " + last_image)
             last_url = last_image
-    time.sleep(10)
+    time.sleep(8)
 
-
+end = time.time()
+print("elapsed time : ")
+print(end - start)
 
