@@ -35,6 +35,9 @@ def get_last_url(images, request):
     else:
         print("Request failed")
         print(request)
+        end = time.time()
+        print("elapsed time : ")
+        print(end - start)
         print(request.headers["Retry-After"])
         time.sleep(int(request.headers["Retry-After"]))
         return False
