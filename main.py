@@ -27,6 +27,7 @@ def get_posts():
 
 
 def get_last_url(images, request):
+    global start
     if(len(images) != 0):
         first_image = images[0]
         img_url = first_image.find('a').get('href')
@@ -38,8 +39,9 @@ def get_last_url(images, request):
         end = time.time()
         print("elapsed time : ")
         print(end - start)
-        print(request.headers["Retry-After"])
-        time.sleep(int(request.headers["Retry-After"]))
+        start = time.time()
+        # print(request.headers["Retry-After"])
+        time.sleep(5)
         return False
 
 last_url = 'https://ethanbriffa.medium.com/second-story-957015a76976'
@@ -60,7 +62,7 @@ while count < 60:
             print("New Post !! " + last_image)
             send_To_Webhook(last_image)
             last_url = last_image
-    time.sleep(8)
+    time.sleep(10)
 
 end = time.time()
 print("elapsed time : ")
