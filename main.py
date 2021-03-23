@@ -1,6 +1,5 @@
 import requests
 import datetime
-import xmltodict
 import time
 from discord_webhook import DiscordWebhook
 from bs4 import BeautifulSoup
@@ -14,7 +13,7 @@ def send_To_Webhook(medium_post):
 
 
 def get_posts():
-    # headers = {
+    # headers =
     #     'Content-Type': "application/x-www-form-urlencoded",
     #     'cache-control': "no-cache",
     #     "Pragma": "no-cache"
